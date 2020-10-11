@@ -5,3 +5,6 @@ The `layerfuse` function was developed to merge data between overlapping `geopan
 Read the Wiki pages for more information: </br>
 [Methodology](https://github.com/skynet93/Layerfuse/wiki/Layerfuse-Methodology) </br>
 [Example](https://github.com/skynet93/Layerfuse/wiki/Layerfuse-Example)
+
+# Version
+At the time of development, Python version 3.7.6 was used with Pandas version 1.0.4 and Geopandas version 0.7.0.
