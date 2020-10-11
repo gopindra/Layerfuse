@@ -1,6 +1,6 @@
 # Layerfuse
 
-The layerfuse function was developed to merge data between overlapping geopandas.GeoDataFrame objects. Unlike the typical merge (or JOIN in the SQL lingo) function that matches data between data tables based on a common shared key value, the function in this module uses overlap between polygons of the GeoDataFrame objects to match attributes. If the attributes of a GeoDataFrame A are being merged into a GeoDataFrame B (the SQL analogy would be B LEFT JOIN A), the attribute value of each polygon in B will be a function of the attribute values of the overlapping polygons in GeoDataFrame A. The layerfuse function can handle two types of attributes – size attributes and density attributes – each of which is handled differently.
+The `layerfuse` function was developed to merge data between overlapping `geopandas.GeoDataFrame` objects. Unlike the typical merge (or `JOIN` in the SQL lingo) function that matches data between data tables based on a common shared key value, the function in this module uses overlap between polygons of the GeoDataFrame objects to match attributes. If the attributes of a GeoDataFrame `A` are being merged into a GeoDataFrame `B` (the SQL analogy would be `B LEFT JOIN A`), the attribute value of each polygon in `B` will be a function of the attribute values of the overlapping polygons in GeoDataFrame `A`. The layerfuse function can handle two types of attributes – size attributes and density attributes – each of which is handled differently.
 
 ## Layerfuse Size Attributes
 
@@ -12,13 +12,12 @@ The attributes that measure the density of features in a polygon are referred to
 
 ## Example
 
-Consider the case of the two GeoDataFrame A and B shown below. A has 5 polygons and B has 3.
+Consider the case of the two GeoDataFrame `A` and `B` shown below. `A` has 5 polygons and `B` has 3.
 
 ![Image of GeoDataFrames A and B](.\Res\Polygons.png)
 
-GeoDataFrame A has a size attribute `x` and a density attribute `y`. These attributes have to be merged into the GeoDataFrame B. The areas of the polygons in A, areas of polygons in B and the area of overlap between polygons of A and polygons of B are known. The attribute values of the two GeoDataFrames A are given below.
+GeoDataFrame `A` has a size attribute `x` and a density attribute `y`. These attributes have to be merged into the GeoDataFrame `B`. The areas of the polygons in `A`, areas of polygons in `B` and the area of overlap between polygons of `A` and polygons of `B` are known. The attribute values of the two GeoDataFrames `A` are given below.
 
-```markdown
 | Polygon | Area | x  | y |
 |---------|------|----|---|
 | A1      | 14   | 70 | 5 |
@@ -26,6 +25,14 @@ GeoDataFrame A has a size attribute `x` and a density attribute `y`. These attri
 | A3      | 15   | 30 | 2 |
 | A4      | 25   | 75 | 3 |
 | A5      | 10   | 60 | 6 |
-```
 
-The areas of the polygons in GeoDataFrame B and their overlap with the polygons in GeoDataFrame A are
+The areas of the polygons in GeoDataFrame `B` and their overlap with the polygons in GeoDataFrame `A` are as follows.
+
+| Polygon | Area  |  Overlap A1 | Overlap A2 | Overlap A3 | Overlap A4 | Overlap A5 |
+|---------|-------|----|----|----|----|----|
+| B1      | 20    | 5  | 9  | 6  | 0  | 0  |
+| B1      | 15    | 0  | 6  | 4  | 4  | 1  |
+| B3      | 25    | 0  | 0  | 0  | 16 | 4  |
+
+Note that some part of Polygon `B3` lies outside of all the polygons in `A`.
+
